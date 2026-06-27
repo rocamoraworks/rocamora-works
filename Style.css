@@ -1,0 +1,165 @@
+/* ================================
+   Rocamora Works — Base Styles
+================================ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f7f6f2;
+    color: #111111;
+    line-height: 1.5;
+}
+
+/* ================================
+   Header / Navigation
+================================ */
+
+header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background-color: #f7f6f2;
+    border-bottom: 1px solid #d8d6cf;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 40px;
+}
+
+.logo {
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 28px;
+}
+
+nav a {
+    color: #111111;
+    text-decoration: none;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+nav a:hover {
+    border-bottom: 1px solid #111111;
+}
+
+/* ================================
+   Main Layout
+================================ */
+
+main {
+    padding: 0 40px;
+}
+
+section {
+    padding: 100px 0;
+    border-bottom: 1px solid #d8d6cf;
+}
+
+/* ================================
+   Hero Section
+================================ */
+
+#home {
+    min-height: 85vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#home h1 {
+    font-size: clamp(56px, 11vw, 150px);
+    line-height: 0.9;
+    letter-spacing: -0.06em;
+    max-width: 1100px;
+}
+
+#home p {
+    margin-top: 28px;
+    font-size: clamp(18px, 2vw, 28px);
+    max-width: 760px;
+}
+
+/* ================================
+   Section Titles
+================================ */
+
+h2 {
+    font-size: clamp(32px, 5vw, 72px);
+    line-height: 1;
+    letter-spacing: -0.04em;
+    margin-bottom: 40px;
+}
+
+/* ================================
+   Placeholder Section Text
+================================ */
+
+section p {
+    max-width: 760px;
+    font-size: 20px;
+}
+
+/* ================================
+   Footer
+================================ */
+
+footer {
+    padding: 40px;
+    font-size: 14px;
+    color: #555555;
+}
+
+/* ================================
+   Mobile Layout
+================================ */
+
+@media (max-width: 800px) {
+    nav {
+        padding: 20px;
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 18px;
+    }
+
+    nav ul {
+        flex-wrap: wrap;
+        gap: 16px;
+    }
+
+    main {
+        padding: 0 20px;
+    }
+
+    section {
+        padding: 72px 0;
+    }
+
+    #home {
+        min-height: 75vh;
+    }
+
+    footer {
+        padding: 32px 20px;
+    }
+}
