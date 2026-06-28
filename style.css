@@ -195,6 +195,7 @@ a {
   isolation: isolate;
   background-size: cover;
   background-position: center;
+  transition: transform 220ms ease, filter 220ms ease;
 }
 
 .feature-panel::before {
@@ -211,6 +212,15 @@ a {
   letter-spacing: 0.08em;
   line-height: 1;
   text-transform: uppercase;
+  transition: color 220ms ease;
+}
+
+.feature-panel p {
+  max-width: 340px;
+  margin-top: 12px;
+  color: rgba(255, 255, 255, 0.82);
+  line-height: 1.45;
+  transition: color 220ms ease;
 }
 
 .photo-tile span {
@@ -227,6 +237,16 @@ a {
   line-height: 1.04;
 }
 
+.feature-panel:hover,
+.feature-panel:focus-visible {
+  transform: translateY(-6px);
+  filter: brightness(1.08);
+}
+
+.feature-panel:hover span,
+.feature-panel:focus-visible span,
+.feature-panel:hover p,
+.feature-panel:focus-visible p,
 .feature-panel:hover strong,
 .photo-tile:hover span {
   color: #f0d8b8;
