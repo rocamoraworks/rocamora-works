@@ -3,6 +3,7 @@
 // This maps scroll position to --story-progress, so images rise from below
 // the viewport instead of simply appearing after a trigger point.
 const buildingStories = [...document.querySelectorAll(".building-story")];
+const draggableImages = [...document.querySelectorAll(".building-visual img")];
 
 // Animation tuning controls:
 // - PROGRESS_SECTION_WEIGHT controls timing/sync with each section.
@@ -20,6 +21,10 @@ const COPY_FADE_SPEED = 1.8;
 const COPY_FADE_DELAY = 0.12;
 
 const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
+const getPixelValue = (story, property) =>
+  parseFloat(story.style.getPropertyValue(property)) || 0;
+
+let activeDrag = null;
 
 function updateBuildingProgress() {
   const viewportHeight = window.innerHeight;
@@ -48,6 +53,53 @@ function updateBuildingProgress() {
     story.classList.toggle("is-active", progress > 0.04 && progress < 0.96);
   });
 }
+
+function startImageDrag(event) {
+  const image = event.currentTarget;
+  const story = image.closest(".building-story");
+
+  if (!story) return;
+
+  event.preventDefault();
+  image.setPointerCapture(event.pointerId);
+  story.classList.add("is-dragging");
+
+  activeDrag = {
+    image,
+    story,
+    pointerId: event.pointerId,
+    startX: event.clientX,
+    startY: event.clientY,
+    dragX: getPixelValue(story, "--drag-x"),
+    dragY: getPixelValue(story, "--drag-y"),
+  };
+}
+
+function moveImageDrag(event) {
+  if (!activeDrag || event.pointerId !== activeDrag.pointerId) return;
+
+  const nextX = activeDrag.dragX + event.clientX - activeDrag.startX;
+  const nextY = activeDrag.dragY + event.clientY - activeDrag.startY;
+
+  activeDrag.story.style.setProperty("--drag-x", `${nextX.toFixed(1)}px`);
+  activeDrag.story.style.setProperty("--drag-y", `${nextY.toFixed(1)}px`);
+}
+
+function stopImageDrag(event) {
+  if (!activeDrag || event.pointerId !== activeDrag.pointerId) return;
+
+  activeDrag.story.classList.remove("is-dragging");
+  activeDrag.image.releasePointerCapture(event.pointerId);
+  activeDrag = null;
+}
+
+draggableImages.forEach((image) => {
+  image.addEventListener("dragstart", (event) => event.preventDefault());
+  image.addEventListener("pointerdown", startImageDrag);
+  image.addEventListener("pointermove", moveImageDrag);
+  image.addEventListener("pointerup", stopImageDrag);
+  image.addEventListener("pointercancel", stopImageDrag);
+});
 
 window.addEventListener("scroll", updateBuildingProgress, { passive: true });
 window.addEventListener("resize", updateBuildingProgress);

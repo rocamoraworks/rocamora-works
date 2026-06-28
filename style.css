@@ -347,6 +347,8 @@ a {
 
 .building-story {
   --story-progress: 0;
+  --drag-x: 0px;
+  --drag-y: 0px;
   min-height: 128vh;
   display: grid;
   grid-template-columns: minmax(0, 1.08fr) minmax(320px, 0.92fr);
@@ -354,6 +356,10 @@ a {
   align-items: center;
   padding: 12vh 0;
   border-bottom: 1px solid var(--line);
+}
+
+.building-story.is-dragging {
+  z-index: 5;
 }
 
 .building-story.reverse {
@@ -366,12 +372,13 @@ a {
 
 .building-visual {
   position: sticky;
+  z-index: 1;
   top: var(--image-sticky-top, 92px);
   min-height: calc(100vh - 120px);
   display: flex;
   align-items: var(--image-vertical-align, flex-end);
   justify-content: var(--image-horizontal-align, center);
-  overflow: hidden;
+  overflow: visible;
 }
 
 .building-visual::before {
@@ -390,14 +397,22 @@ a {
   max-height: var(--image-max-height, calc(100vh - 130px));
   object-fit: contain;
   transform: translate(
-      var(--image-x, 0px),
-      calc(var(--image-y, 76vh) + var(--image-offset-y, 0px))
+      calc(var(--image-x, 0px) + var(--drag-x, 0px)),
+      calc(var(--image-y, 76vh) + var(--image-offset-y, 0px) + var(--drag-y, 0px))
     )
     scale(var(--image-scale, 1));
   transform-origin: bottom center;
   opacity: var(--image-opacity, 0);
   filter: drop-shadow(0 28px 32px rgba(17, 17, 17, 0.18));
   will-change: transform, opacity;
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.building-story.is-dragging .building-visual img {
+  cursor: grabbing;
 }
 
 .building-copy {
