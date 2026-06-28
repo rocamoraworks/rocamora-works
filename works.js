@@ -12,9 +12,9 @@ const buildingStories = [...document.querySelectorAll(".building-story")];
 // - COPY_SLIDE_DISTANCE controls how much the text drifts up with the image.
 // - IMAGE_FADE_SPEED and COPY_FADE_SPEED control how quickly each fades in.
 // - COPY_FADE_DELAY keeps the text slightly behind the image.
-const PROGRESS_SECTION_WEIGHT = 0.25;
+const PROGRESS_SECTION_WEIGHT = .1;
 const IMAGE_SLIDE_DISTANCE = 0.16;
-const COPY_SLIDE_DISTANCE = 0.18;
+const COPY_SLIDE_DISTANCE = 0.48;
 const IMAGE_FADE_SPEED = 1.35;
 const COPY_FADE_SPEED = 1.8;
 const COPY_FADE_DELAY = 0.12;

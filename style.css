@@ -10,8 +10,8 @@
 }
 
 * {
-  margin: 0;
-  padding: 0;
+  margin: 0%;
+  padding: 10px;
   box-sizing: border-box;
 }
 
@@ -97,7 +97,7 @@ a {
   background-position: center;
   display: flex;
   align-items: flex-end;
-  padding: 132px 40px 72px;
+  padding: 132px 40px 70px;
 }
 
 .hero-text {
@@ -366,11 +366,11 @@ a {
 
 .building-visual {
   position: sticky;
-  top: 92px;
+  top: var(--image-sticky-top, 92px);
   min-height: calc(100vh - 120px);
   display: flex;
-  align-items: flex-end;
-  justify-content: center;
+  align-items: var(--image-vertical-align, flex-end);
+  justify-content: var(--image-horizontal-align, center);
   overflow: hidden;
 }
 
@@ -385,12 +385,15 @@ a {
 }
 
 .building-visual img {
-  /* Position is controlled by works.js through --image-y.
-     --image-scale is optional per project if one cutout needs to be larger. */
-  width: min(108%, 860px);
-  max-height: calc(100vh - 130px);
+  /* Per-project controls live on each .building-story in works.html. */
+  width: min(var(--image-width, 860px), var(--image-fluid-width, 108%));
+  max-height: var(--image-max-height, calc(100vh - 130px));
   object-fit: contain;
-  transform: translateY(var(--image-y, 76vh)) scale(var(--image-scale, 1));
+  transform: translate(
+      var(--image-x, 0px),
+      calc(var(--image-y, 76vh) + var(--image-offset-y, 0px))
+    )
+    scale(var(--image-scale, 1));
   transform-origin: bottom center;
   opacity: var(--image-opacity, 0);
   filter: drop-shadow(0 28px 32px rgba(17, 17, 17, 0.18));
@@ -421,10 +424,8 @@ a {
 }
 
 .building-story:first-child .building-visual img {
-  /* Pixel Chair sizing only. Change --image-scale to make this cutout larger/smaller. */
-  --image-scale: 1.28;
-  width: min(128%, 1120px);
-  max-height: calc(100vh - 70px);
+  --image-fluid-width: 128%;
+  --image-max-height: calc(100vh - 70px);
 }
 
 /* Keeps the page accessible for people who prefer less animation. */
