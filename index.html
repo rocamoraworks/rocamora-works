@@ -8,36 +8,59 @@
 </head>
 <body>
 
-  <header>
+  <header class="site-header">
     <a class="logo" href="index.html">Rocamora Works</a>
 
-    <nav>
-      <a href="index.html">Home</a>
+    <nav class="site-nav" aria-label="Main navigation">
+      <a class="active" href="index.html">Home</a>
       <a href="about.html">About</a>
       <a href="works.html">Works</a>
+      <a href="photography.html">Photography</a>
     </nav>
   </header>
 
   <main>
+    <!-- Hero: first full-screen homepage section. Change Images/hero.jpg in CSS to swap the background. -->
     <section class="hero">
       <div class="hero-text">
         <h1>Rocamora Works</h1>
-        <p>Architecture · Photography · Research</p>
+        <p class="eyebrow">Architecture &middot; Photography &middot; Research</p>
       </div>
     </section>
 
-    <section class="content-section">
-      <h2>Introduction</h2>
-      <p>
-        My name is Joshua Rocamora and here you will find my work in different fields such as architecture, photography, and research.
-      </p>
+    <!-- Introduction: this is the first text section after the hero image. -->
+    <section class="intro-section">
+      <div class="intro-copy">
+        <p class="eyebrow">Introduction</p>
+        <h2>Welcome to my work archive</h2>
+      </div>
+
+      <div class="intro-body">
+        <p>
+          My name is Joshua Rocamora. This site collects work across architecture,
+          photography, and research, with an emphasis on careful observation,
+          material detail, and the way people move through built environments.
+        </p>
+        <a class="text-link" href="works.html">View selected work</a>
+      </div>
     </section>
 
-    <section class="content-section">
-      <h2>More Content</h2>
-      <p>
-        Add more information, project descriptions, images, or links here later.
-      </p>
+    <!-- Feature tabs: edit each link, label, and description here. Background images are set in CSS. -->
+    <section class="feature-grid" aria-label="Site sections">
+      <a class="feature-panel architecture-panel" href="works.html">
+        <span>Architecture</span>
+        <strong>Projects, drawings, and design explorations.</strong>
+      </a>
+
+      <a class="feature-panel photography-panel" href="photography.html">
+        <span>Photography</span>
+        <strong>Events, portraits, street work, and visual studies.</strong>
+      </a>
+
+      <a class="feature-panel research-panel" href="about.html">
+        <span>Research</span>
+        <p>Questions, methods, and background behind the work.</p>
+      </a>
     </section>
   </main>
 

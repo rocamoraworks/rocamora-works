@@ -8,20 +8,96 @@
 </head>
 <body>
 
-  <header>
+  <header class="site-header">
     <a class="logo" href="index.html">Rocamora Works</a>
 
-    <nav>
+    <nav class="site-nav" aria-label="Main navigation">
       <a href="index.html">Home</a>
       <a href="about.html">About</a>
-      <a href="works.html">Works</a>
+      <a class="active" href="works.html">Works</a>
+      <a href="photography.html">Photography</a>
     </nav>
   </header>
 
-  <main class="page">
-    <h1>Works</h1>
-    <p>Add your architecture, photography, and research projects here later.</p>
+  <main class="page architecture-page">
+    <section class="page-hero architecture-hero">
+      <p class="eyebrow">Architecture Works</p>
+      <h1>Scroll studies for buildings, drawings, and spatial ideas.</h1>
+      <p>
+        This page is a motion test. Each building section slides into view one at
+        a time as the visitor scrolls. Swap the image paths below with transparent
+        building cutout PNGs when your final graphics are ready.
+      </p>
+    </section>
+
+    <!-- Scroll gallery: each .building-story is one animated building moment. -->
+    <section class="building-scroll" aria-label="Architecture scroll studies">
+      <article class="building-story reverse">
+        <!-- Pixel Chair cutout: replace this file path if you make a newer PNG version. -->
+        <figure class="building-visual">
+          <img src="Images/PNG cutouts/Pixel Chair 1.png" alt="Pixel Chair architectural chair exploration cutout" />
+        </figure>
+
+        <div class="building-copy">
+          <p class="eyebrow">Project 01</p>
+          <h2>PIXEL CHAIR</h2>
+          <p>
+            An architectural exploration of chairs.
+          </p>
+        </div>
+      </article>
+
+      <article class="building-story">
+        <!-- Replace this image with a transparent PNG cutout when ready. -->
+        <figure class="building-visual">
+          <img src="Images/Cut Through.png" alt="Architectural project image titled Cut Through" />
+        </figure>
+
+        <div class="building-copy">
+          <p class="eyebrow">Project 02</p>
+          <h2>Cut Through</h2>
+          <p>
+            A design study focused on circulation, thresholds, and the visual
+            relationship between mass and void.
+          </p>
+        </div>
+      </article>
+
+      <article class="building-story reverse">
+        <!-- Replace this image with a transparent PNG cutout when ready. -->
+        <figure class="building-visual">
+          <img src="Images/Cut Through(2).png" alt="Architectural presentation image titled Cut Through" />
+        </figure>
+
+        <div class="building-copy">
+          <p class="eyebrow">Project 03</p>
+          <h2>Spatial Studies</h2>
+          <p>
+            Research-driven explorations into how buildings frame movement,
+            social activity, and perception.
+          </p>
+        </div>
+      </article>
+
+      <article class="building-story">
+        <!-- Duplicate this article block to add another building to the scroll sequence. -->
+        <figure class="building-visual">
+          <img src="Images/Cut Through.png" alt="Architectural massing study placeholder" />
+        </figure>
+
+        <div class="building-copy">
+          <p class="eyebrow">Project 04</p>
+          <h2>Material Sequence</h2>
+          <p>
+            A placeholder moment for another building, model, or drawing that
+            can slide into the page as its own chapter.
+          </p>
+        </div>
+      </article>
+    </section>
   </main>
 
+  <!-- Scroll animation: watches each building and adds .is-visible when it enters view. -->
+  <script src="works.js"></script>
 </body>
 </html>
