@@ -15,7 +15,7 @@ const draggableImages = [...document.querySelectorAll(".building-visual img")];
 // - COPY_FADE_DELAY keeps the text slightly behind the image.
 const PROGRESS_SECTION_WEIGHT = .1;
 const IMAGE_SLIDE_DISTANCE = 0.16;
-const COPY_SLIDE_DISTANCE = 0.48;
+const COPY_SLIDE_DISTANCE = 1;
 const IMAGE_FADE_SPEED = 1.35;
 const COPY_FADE_SPEED = 1.8;
 const COPY_FADE_DELAY = 0.12;
