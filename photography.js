@@ -1,5 +1,5 @@
 // Freeform photography page.
-// Add new image filenames here when you add files to Images/photography.
+// This list is synced from Images/photography by scripts/update-photography-list.sh.
 const PHOTO_FOLDER = "Images/photography";
 const PHOTO_FILES = [
   "DSC00787.jpg",
@@ -59,6 +59,20 @@ const PHOTO_FILES = [
 
 const photoField = document.querySelector("#photoField");
 const dragClickThreshold = 7;
+
+// Layout spacing controls:
+// - PHOTO_VERTICAL_SPACING changes distance between photos in the same pattern.
+// - PHOTO_ROW_SPACING changes distance before the pattern repeats.
+// - PHOTO_HORIZONTAL_SPREAD pushes photos outward from the center.
+// - PHOTO_RANDOM_X and PHOTO_RANDOM_Y add controlled organic randomness.
+// - PHOTO_CANVAS_EXTRA keeps the page tall enough for larger spacing.
+const PHOTO_VERTICAL_SPACING = 1.38;
+const PHOTO_ROW_SPACING = 170;
+const PHOTO_HORIZONTAL_SPREAD = 1.08;
+const PHOTO_RANDOM_X = 7;
+const PHOTO_RANDOM_Y = 14;
+const PHOTO_CANVAS_EXTRA = 70;
+
 const layoutPattern = [
   { left: 6, top: 3, width: "32vw", rotate: "-2.5deg" },
   { left: 48, top: 8, width: "29vw", rotate: "1.5deg" },
@@ -79,15 +93,46 @@ let photoViewerImage = null;
 const getPhotoPixelValue = (photo, property) =>
   parseFloat(photo.style.getPropertyValue(property)) || 0;
 
+function seededRandom(seed) {
+  let hash = 2166136261;
+
+  for (let index = 0; index < seed.length; index += 1) {
+    hash ^= seed.charCodeAt(index);
+    hash = Math.imul(hash, 16777619);
+  }
+
+  return (hash >>> 0) / 4294967295;
+}
+
+function getSpreadLeft(left) {
+  return Math.min(82, Math.max(2, 50 + (left - 50) * PHOTO_HORIZONTAL_SPREAD));
+}
+
+function updatePhotoFieldHeight() {
+  const rowCount = Math.ceil(PHOTO_FILES.length / layoutPattern.length);
+  const height = Math.max(260, rowCount * PHOTO_ROW_SPACING + PHOTO_CANVAS_EXTRA);
+  const photoCanvas = photoField.closest(".photo-canvas");
+
+  photoField.style.setProperty("--photo-field-height", `${height}vh`);
+
+  if (photoCanvas) {
+    photoCanvas.style.setProperty("--photo-field-height", `${height}vh`);
+  }
+}
+
 function createLoosePhoto(file, index) {
   const pattern = layoutPattern[index % layoutPattern.length];
   const row = Math.floor(index / layoutPattern.length);
+  const randomX = (seededRandom(`${file}-x`) - 0.5) * PHOTO_RANDOM_X;
+  const randomY = (seededRandom(`${file}-y`) - 0.5) * PHOTO_RANDOM_Y;
+  const left = getSpreadLeft(pattern.left) + randomX;
+  const top = pattern.top * PHOTO_VERTICAL_SPACING + row * PHOTO_ROW_SPACING + randomY;
   const photo = document.createElement("figure");
   const image = document.createElement("img");
 
   photo.className = "loose-photo";
-  photo.style.setProperty("--photo-left", `${pattern.left}%`);
-  photo.style.setProperty("--photo-top", `${pattern.top + row * 122}vh`);
+  photo.style.setProperty("--photo-left", `${left.toFixed(2)}%`);
+  photo.style.setProperty("--photo-top", `${top.toFixed(2)}vh`);
   photo.style.setProperty("--photo-width", pattern.width);
   photo.style.setProperty("--photo-rotate", pattern.rotate);
   photo.style.setProperty("--photo-z", String(index + 1));
@@ -203,6 +248,8 @@ function stopPhotoDrag(event) {
 }
 
 if (photoField) {
+  updatePhotoFieldHeight();
+
   PHOTO_FILES.forEach((file, index) => {
     const photo = createLoosePhoto(file, index);
 

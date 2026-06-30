@@ -58,4 +58,4 @@ awk -v photo_list="$photo_list" '
 ' "$target" > "$tmp_file"
 
 mv "$tmp_file" "$target"
-echo "Updated photography.js with $photo_count image file(s)."
+echo "Synced photography.js with $photo_count image file(s) from Images/photography."
